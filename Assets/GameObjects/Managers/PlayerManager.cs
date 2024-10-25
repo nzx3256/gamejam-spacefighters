@@ -5,7 +5,6 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
 
-
 [RequireComponent(typeof(PlayerInput))]
 public class PlayerManager : MonoBehaviour
 {
@@ -16,18 +15,28 @@ public class PlayerManager : MonoBehaviour
         count = 0;
     }
 
-    public GameObject playerObject;
+    [SerializeField]
+    private GameObject playerPrefab;
+
+    public GameObject playerReference;
     private PlayerInput inputComponent;
+
+    public Color playerColor;
+    public string fighterType;
 
     private void OnEnable()
     {
         SceneManager.sceneLoaded += OnLoadScene;
+        UIButtonScript.gameStart += SetPrefabFromType;
     }
 
     private void Start()
     {
         gameObject.name = "PlayerManager" + count;
-        count++;
+        if(++count > 2)
+        {
+            count = 0;
+        }
 
         inputComponent = GetComponent<PlayerInput>();
 
@@ -37,6 +46,13 @@ public class PlayerManager : MonoBehaviour
     private void OnDisable()
     {
         SceneManager.sceneLoaded -= OnLoadScene;
+        UIButtonScript.gameStart -= SetPrefabFromType;
+        if(playerReference != null)
+        {
+            PlayerController pc = playerReference.GetComponent<PlayerController>();
+            SetInputAction("Move", pc.onMove,true); //unsetting move action
+            SetInputAction("Fire", pc.onFire,true); //unsetting fire action
+        }
     }
 
     private void OnLoadScene(Scene scene, LoadSceneMode node)
@@ -44,35 +60,71 @@ public class PlayerManager : MonoBehaviour
         BoundingBoxScript boundingBox = FindObjectOfType<BoundingBoxScript>();
         if(boundingBox != null) //Meaning the scene is in a playable game state on load
         {
-            Debug.Log("Found BoundingBox");
+            //Debug.Log("Found BoundingBox");
             CreatePlayer(boundingBox.transform);
+        }
+        if(scene.buildIndex == 0)
+        {
+            Destroy(gameObject);
+        }
+    }
+
+    private void SetPrefabFromType()
+    {
+        //Debug.Log("SetPrefabFromType called");
+        if(PlayerInputManager.instance != null)
+        {
+            if(!MultiplayerManager.shipPrefabDictionary.TryGetValue(fighterType, out playerPrefab))
+            {
+                //Debug.Log("WARNING: Can't find key value \""+ fighterType + "\" in MultiplayerManager.shipPrefabDictionary.");
+            }
+            else
+            {
+                //Debug.Log("playerPrefab successfully set");
+            }
+        }
+        else { 
+            //Debug.Log("PlayerInstance is null"); 
         }
     }
 
     private void CreatePlayer(Transform b)
     {
-        GameObject PlayerRef = Instantiate(playerObject, b.position, Quaternion.identity);
-        PlayerInput inputPresets = PlayerRef.GetComponent<PlayerInput>();
-        PlayerController controller = PlayerRef.GetComponent<PlayerController>();
-        if(inputPresets != null){
-            if(inputPresets.actions != null)
-            {
-                inputComponent.actions = inputPresets.actions;
-            }
-            foreach(InputAction action in inputComponent.actions)
-            {
-                try
-                {
-                    string name = action.name;
-                    action.actionMap.actionTriggered = inputPresets[name].actionMap.actionTriggered.GetInvocationList()[0];
-                    action.Enable();
-                }
-                catch(Exception ex)
-                {
-                    Debug.LogError(ex.Message);
-                }
-            }
-            inputPresets.enabled = false;
+        if(playerReference != null)
+        {
+            Destroy(playerReference);
+        }
+        playerReference = Instantiate(playerPrefab, b.position, Quaternion.identity);
+        playerReference.GetComponent<SpriteRenderer>().color = playerColor;
+        PlayerController pc = playerReference.GetComponent<PlayerController>();
+        SetInputAction("Move", pc.onMove);
+        SetInputAction("Fire", pc.onFire);
+    }
+
+    private void DestroyPlayer()
+    {
+        if(playerReference != null)
+        {
+            PlayerController pc = playerReference.GetComponent<PlayerController>();
+            SetInputAction("Move", pc.onMove,true); //unsetting move action
+            SetInputAction("Fire", pc.onFire,true); //unsetting fire action
+            Destroy(playerReference);
+        }
+    }
+
+    private void SetInputAction(string actionName, Action<InputAction.CallbackContext> function, bool unset = false)
+    {
+        if(!unset)
+        {
+            inputComponent.actions[actionName].started += function;
+            inputComponent.actions[actionName].performed += function;
+            inputComponent.actions[actionName].canceled += function;
+        }
+        else 
+        {
+            inputComponent.actions[actionName].started -= function;
+            inputComponent.actions[actionName].performed -= function;
+            inputComponent.actions[actionName].canceled -= function;
         }
     }
 }

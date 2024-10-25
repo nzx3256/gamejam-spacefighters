@@ -7,6 +7,8 @@ public class UIButtonScript : MonoBehaviour
 {
     [SerializeField]
     private CanvasScript canvasScript;
+    public delegate void GameStart();
+    public static event GameStart gameStart;
 
     private void Start()
     {
@@ -18,7 +20,7 @@ public class UIButtonScript : MonoBehaviour
 
     public void PanelChange(GameObject targetPanel)
     {
-        Debug.Log("Button \"" + gameObject.name + "\" Clicked");
+        //Debug.Log("Button \"" + gameObject.name + "\" Clicked");
         canvasScript.SetPanel(targetPanel);
     }
 
@@ -29,6 +31,7 @@ public class UIButtonScript : MonoBehaviour
 
     public void StartButton()
     {
-        SceneManager.LoadScene("TesterScene");
+        gameStart?.Invoke();
+        SceneManager.LoadScene("TesterScene", LoadSceneMode.Single);
     }
 }

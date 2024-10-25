@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 2467210579480154940}
   - component: {fileID: 6912970012233595863}
   m_Layer: 6
-  m_Name: ShieldFighter
+  m_Name: Shield_Fighter
   m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -114,7 +114,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 0
+  m_Constraints: 4
 --- !u!114 &4468765464259433248
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -129,7 +129,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moveSpeed: 3.8
   fireDelay: 0.3
-  bulletPrefab: {fileID: 0}
+  bulletPrefab: {fileID: 6888432690750049954, guid: 6695faf74ad044d4b8a18587e84cbc99, type: 3}
 --- !u!114 &2467210579480154940
 MonoBehaviour:
   m_ObjectHideFlags: 0

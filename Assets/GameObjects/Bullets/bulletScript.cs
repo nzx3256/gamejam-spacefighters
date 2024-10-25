@@ -5,34 +5,40 @@ using UnityEngine;
 [RequireComponent(typeof(Rigidbody2D))]
 public class bulletScript : MonoBehaviour
 {
-    public Vector2 velocity2;
+    public Vector2 initialVelocity;
     private Collider2D col;
     private Rigidbody2D rb;
     private Camera cam;
     
     void Start()
     {
+        Transform bulletContainer = GameObject.FindWithTag("BulletContainer").transform;
+        if(bulletContainer != null)
+        {
+            transform.SetParent(bulletContainer);
+        }
+
         rb = GetComponent<Rigidbody2D>();
         rb.gravityScale = 0;
         if(!TryGetComponent(out col))
         {
-            Debug.LogError("No Collider on " + gameObject.name+ ". Destroying Object");
+            //Debug.LogError("No Collider on " + gameObject.name+ ". Destroying Object");
             Destroy(gameObject);
         }
         col.isTrigger = true;
         cam = Camera.main;
         if(cam == null)
         {
-            Debug.LogError("Could not find main camera. Destroying " + gameObject.name);
+            //Debug.LogError("Could not find main camera. Destroying " + gameObject.name);
             Destroy(gameObject);
         }
     }
 
     void Update()
     {
-        if(rb.velocity != velocity2)
+        if(rb.velocity != initialVelocity)
         {
-            rb.velocity = velocity2;
+            rb.velocity = initialVelocity;
         }
         if(cam != null && cam.orthographic){
             //Destroy the bullet if off screen

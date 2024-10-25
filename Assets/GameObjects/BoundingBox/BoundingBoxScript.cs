@@ -10,14 +10,14 @@ public class BoundingBoxScript : MonoBehaviour
     private float camSize;
     [SerializeField]
     private float moveSpeed = 1f;
-    private Transform up, down, left, right;
+    private Transform up, down, left, right, player1Spawn, player2Spawn;
 
     private void Start()
     {
         cam = Camera.main;
         if(cam == null || !cam.orthographic)
         {
-            Debug.Log("No orthographic camera in scene. Disabling this script: ["+gameObject.name+","+this.name+"]");
+            //Debug.Log("No orthographic camera in scene. Disabling this script: ["+gameObject.name+","+this.name+"]");
             this.enabled = false;
         }
         else
@@ -26,17 +26,17 @@ public class BoundingBoxScript : MonoBehaviour
         }
         if(!TryGetComponent(out rb))
         {
-            Debug.Log("Rigidbody2Dd not set on " + gameObject.name + ".");
+            //Debug.Log("Rigidbody2Dd not set on " + gameObject.name + ".");
         }
 
-        InitColliders();
+        _InitChildren();
 
     }
 
-    private void InitColliders()
+    private void _InitChildren()
     {
         float aspect = cam.aspect;
-        Debug.Log("\nRatio: " + cam.aspect + "\nResolution: " + Screen.currentResolution.width + ":" + Screen.currentResolution.height);
+        //Debug.Log("\nRatio: " + cam.aspect + "\nResolution: " + Screen.currentResolution.width + ":" + Screen.currentResolution.height);
         
         foreach(Transform child in transform)
         {
@@ -54,20 +54,30 @@ public class BoundingBoxScript : MonoBehaviour
                 case "right":
                     right = child;
                     break;
+                case "Player1Spawn":
+                    player1Spawn = child;
+                    break;
+                case "Player2Spawn":
+                    player2Spawn = child;
+                    break;
                 default:
-                    Debug.Log("WARNING: Child in \"" + gameObject.name + "\" with name other than up, down, left, or right.");
+                    //Debug.Log("WARNING: Child in \"" + gameObject.name + "\" with name other than up, down, left, or right.");
                     break;
             }
         }
 
-        up.position = cam.transform.position + camSize * Vector3.up;
-        down.position = cam.transform.position + camSize * Vector3.down;
-        left.position = cam.transform.position + camSize * aspect * Vector3.left;
-        right.position = cam.transform.position + camSize * aspect * Vector3.right;
+        up.position = transform.position + camSize * Vector3.up;
+        down.position = transform.position + camSize * Vector3.down;
+        left.position = transform.position + camSize * aspect * Vector3.left;
+        right.position = transform.position + camSize * aspect * Vector3.right;
         up.GetComponent<BoxCollider2D>().size = new Vector2(2*camSize*aspect,camSize*0.3f);
         down.GetComponent<BoxCollider2D>().size = new Vector2(2*camSize*aspect,camSize*0.3f);
         left.GetComponent<BoxCollider2D>().size = new Vector2(0.3f*camSize,camSize*2);
         right.GetComponent<BoxCollider2D>().size = new Vector2(0.3f*camSize,camSize*2);
+
+        float mult = PlayerManager.count > 1 ? 1f : 0f;
+        player1Spawn.position = Vector3.down * camSize * 0.4f + Vector3.left * camSize * mult;
+        player2Spawn.position = Vector3.down * camSize * 0.4f + Vector3.right * camSize * 1f;
     }
 
     void Update()
@@ -80,13 +90,13 @@ public class BoundingBoxScript : MonoBehaviour
             }
             if(camSize != cam.orthographicSize)
             {
-                InitColliders();
+                _InitChildren();
                 camSize = cam.orthographicSize;
             }
         }
         catch(Exception ex)
         {
-            Debug.Log(ex.Message);
+            //Debug.Log(ex.Message);
         }
 
     }

@@ -48,6 +48,7 @@ MonoBehaviour:
   ShipPrefabs:
   - {fileID: 406244542405799796, guid: b137bedda39aa914b9a31710073661ce, type: 3}
   - {fileID: 523413442670065591, guid: aea0f2a5cb1a87242bc1214aa6e6ded2, type: 3}
+  players: []
 --- !u!114 &4740481244236190920
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -98,7 +99,7 @@ MonoBehaviour:
         m_Flags: 0
       m_Flags: 0
     m_Reference: {fileID: -5301425758105774917, guid: 21a6349adfd1cb441bc9f5b8a5d732a6, type: 3}
-  m_PlayerPrefab: {fileID: 776844343618346214, guid: 4f861dfc017c314408fbfbb71331aa49, type: 3}
+  m_PlayerPrefab: {fileID: 5677361643748305801, guid: 9ba9fc834aa6cdc4da6169465867c7ac, type: 3}
   m_SplitScreen: 0
   m_MaintainAspectRatioInSplitScreen: 0
   m_FixedNumberOfSplitScreens: -1

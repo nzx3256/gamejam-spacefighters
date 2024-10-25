@@ -1,5 +1,5 @@
 {
-    "name": "DefaultPlayerInput",
+    "name": "PlayerInputAsset",
     "maps": [
         {
             "name": "Player",

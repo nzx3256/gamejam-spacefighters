@@ -29,7 +29,7 @@ public class CanvasScript : MonoBehaviour
             panel.SetActive(false);
         }
         currentPanel.SetActive(true);
-        Debug.Log("\"" + currentPanel.name + "\" is the active panel");
+        //Debug.Log("\"" + currentPanel.name + "\" is the active panel");
     }
     
     public void SetPanel(GameObject panel)
