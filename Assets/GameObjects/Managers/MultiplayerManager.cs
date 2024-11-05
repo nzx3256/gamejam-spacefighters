@@ -94,7 +94,7 @@ public class MultiplayerManager : MonoBehaviour
             }
             catch(Exception ex)
             {
-                //Debug.Log(ex.Message);
+                Debug.Log("Caught Exception: " + ex.Message);
             }
         }
     }

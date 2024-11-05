@@ -51,6 +51,7 @@ public class PlayerController : MonoBehaviour
             if(bulletPrefab != null)
             {
                 GameObject bullet = Instantiate(bulletPrefab, transform.position + Vector3.up*0.7f, Quaternion.identity);
+                bullet.GetComponent<bulletScript>().initialVelocity = Vector2.up * 8f;
                 StartCoroutine(delayNextShot());
             }
         }
