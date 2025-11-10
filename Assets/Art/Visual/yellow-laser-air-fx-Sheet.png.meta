@@ -1,0 +1,323 @@
+fileFormatVersion: 2
+guid: 1855cbe1cda0618439ebf6526c4bb1cd
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -6272124172524481862
+    second: yellow-laser-air-fx-Sheet_0
+  - first:
+      213: -9062860756148153030
+    second: yellow-laser-air-fx-Sheet_1
+  - first:
+      213: 7362387564850190150
+    second: yellow-laser-air-fx-Sheet_2
+  - first:
+      213: 2373065587343499522
+    second: yellow-laser-air-fx-Sheet_3
+  - first:
+      213: 4144384210326736075
+    second: yellow-laser-air-fx-Sheet_4
+  - first:
+      213: 5029300709320967845
+    second: yellow-laser-air-fx-Sheet_5
+  - first:
+      213: -8432134690150000395
+    second: yellow-laser-air-fx-Sheet_6
+  - first:
+      213: 1360256295943339726
+    second: yellow-laser-air-fx-Sheet_7
+  - first:
+      213: -1276226463227374735
+    second: yellow-laser-air-fx-Sheet_8
+  - first:
+      213: -6588220893290098069
+    second: yellow-laser-air-fx-Sheet_9
+  - first:
+      213: -7490314128825084790
+    second: yellow-laser-air-fx-Sheet_10
+  - first:
+      213: -3696929684050206342
+    second: yellow-laser-air-fx-Sheet_11
+  - first:
+      213: 4115481246245667935
+    second: yellow-laser-air-fx-Sheet_12
+  - first:
+      213: -7007442014688523293
+    second: yellow-laser-air-fx-Sheet_13
+  - first:
+      213: 4932605169421615616
+    second: yellow-laser-air-fx-Sheet_14
+  - first:
+      213: 6507833467433415691
+    second: yellow-laser-air-fx-Sheet_15
+  - first:
+      213: -8811154568714082021
+    second: yellow-laser-air-fx-Sheet_16
+  - first:
+      213: -6242550478883587910
+    second: yellow-laser-air-fx-Sheet_17
+  - first:
+      213: -4368831709395061753
+    second: yellow-laser-air-fx-Sheet_18
+  - first:
+      213: 5271403629378632434
+    second: yellow-laser-air-fx-Sheet_19
+  - first:
+      213: -1235524820381879306
+    second: yellow-laser-air-fx-Sheet_20
+  - first:
+      213: 8338690445540012236
+    second: yellow-laser-air-fx-Sheet_21
+  - first:
+      213: -8854962997740733427
+    second: yellow-laser-air-fx-Sheet_22
+  - first:
+      213: 1508204914063204201
+    second: yellow-laser-air-fx-Sheet_23
+  - first:
+      213: 2611291537008439090
+    second: yellow-laser-air-fx-Sheet_24
+  - first:
+      213: 4630748520017156561
+    second: yellow-laser-air-fx-Sheet_25
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 0
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 32
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: yellow-laser-air-fx-Sheet_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ab29985db40f4f8a0800000000000000
+      internalID: -6272124172524481862
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: yellow-laser-air-fx-Sheet_1
+      rect:
+        serializedVersion: 2
+        x: 32
+        y: 0
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a3516fcc8204a3280800000000000000
+      internalID: -9062860756148153030
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: yellow-laser-air-fx-Sheet_2
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 0
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 64716ad8b747c2660800000000000000
+      internalID: 7362387564850190150
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: yellow-laser-air-fx-Sheet_3
+      rect:
+        serializedVersion: 2
+        x: 96
+        y: 0
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 20120522492dee020800000000000000
+      internalID: 2373065587343499522
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: yellow-laser-air-fx-Sheet_4
+      rect:
+        serializedVersion: 2
+        x: 128
+        y: 0
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: bcc434d3b7fc38930800000000000000
+      internalID: 4144384210326736075
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 3d6b36facee92ad45a923847fff93a00
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      yellow-laser-air-fx-Sheet_0: -6272124172524481862
+      yellow-laser-air-fx-Sheet_1: -9062860756148153030
+      yellow-laser-air-fx-Sheet_2: 7362387564850190150
+      yellow-laser-air-fx-Sheet_3: 2373065587343499522
+      yellow-laser-air-fx-Sheet_4: 4144384210326736075
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

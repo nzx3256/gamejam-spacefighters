@@ -6,36 +6,12 @@ using UnityEngine.Splines;
 public class SpawnerGroup
 {
     [SerializeField]
-    private SplineAnimate splAnim;
-    [SerializeField]
-    private int numToSpawn = 1;
-    [SerializeField]
-    private SplineContainer moveSpline;
-    [SerializeField] [Range(0.3f,10f)]
-    private float delay = 0.5f;
+    private int _numToSpawn = 1;
+    [SerializeField] [Range(0f,10f)]
+    private float _delay = 0.5f;
 
-    public SplineAnimate splineAnimate
-    {
-        get => splAnim;
-    }
-    public int NumToSpawn
-    {
-        get => numToSpawn;
-    }
-    public SplineContainer MoveSpline
-    {
-        get => moveSpline;
-    }
-    public float Delay
-    {
-        get => delay;
-    }
-
-    public SpawnerGroup(SplineAnimate sAnim, SplineContainer spl, int num = 1, float d = 0.5f)
-    {
-        splAnim = sAnim;
-        numToSpawn = num;
-        moveSpline = spl;
-        delay = d;
-    }
+    public int numToSpawn
+    { get => _numToSpawn; }
+    public float delay
+    { get => _delay; }
 }

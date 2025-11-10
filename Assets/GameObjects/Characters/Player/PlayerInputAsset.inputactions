@@ -1,4 +1,5 @@
 {
+    "version": 1,
     "name": "PlayerInputAsset",
     "maps": [
         {
@@ -18,6 +19,15 @@
                     "name": "Fire",
                     "type": "Button",
                     "id": "9249fb88-dfa6-471b-83a0-6b5ed8f6ace9",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "SpecialAction",
+                    "type": "Button",
+                    "id": "ca88995a-08ac-4577-a614-93ed4c508002",
                     "expectedControlType": "",
                     "processors": "",
                     "interactions": "",
@@ -112,8 +122,36 @@
                     "action": "Fire",
                     "isComposite": false,
                     "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "01a0bfdc-e2e1-4c1f-ab65-733345434bac",
+                    "path": "<Keyboard>/f",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": ";MnK",
+                    "action": "SpecialAction",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "165b3769-234d-45e1-af99-9c421029d207",
+                    "path": "<Gamepad>/buttonNorth",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": ";Controller",
+                    "action": "SpecialAction",
+                    "isComposite": false,
+                    "isPartOfComposite": false
                 }
             ]
+        },
+        {
+            "name": "UI",
+            "id": "60e216dc-4a04-4c88-bafd-a442c9c6b9ee",
+            "actions": [],
+            "bindings": []
         }
     ],
     "controlSchemes": [

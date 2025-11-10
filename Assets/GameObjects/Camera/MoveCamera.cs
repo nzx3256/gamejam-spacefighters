@@ -4,18 +4,24 @@ using UnityEngine;
 
 public class MoveCamera : MonoBehaviour
 {
-    private Transform boundingBox;
-    
+    [SerializeField]
+    private float moveVelocity = 1f;
+
+    private float upwardVelocity
+    {
+        get => moveVelocity;
+    }
     void Start()
     {
-        boundingBox = FindObjectOfType<BoundingBoxScript>().transform;
     }
 
     void Update()
     {
-        if(boundingBox != null)
-        {
-            transform.position = (Vector3)Vector2.MoveTowards((Vector2)transform.position, (Vector2)boundingBox.position, 0.5f*Time.deltaTime) + new Vector3(0,0,-10);
-        }
+        transform.position += Vector3.up * Time.deltaTime * moveVelocity;
+    }
+
+    private float getDeltaY()
+    {
+        return moveVelocity;
     }
 }

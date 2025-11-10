@@ -57,12 +57,8 @@ public class PlayerManager : MonoBehaviour
 
     private void OnLoadScene(Scene scene, LoadSceneMode node)
     {
-        BoundingBoxScript boundingBox = FindObjectOfType<BoundingBoxScript>();
-        if(boundingBox != null) //Meaning the scene is in a playable game state on load
-        {
-            //Debug.Log("Found BoundingBox");
-            CreatePlayer(boundingBox.transform);
-        }
+        //Debug.Log("Found BoundingBox");
+        CreatePlayer(Camera.main.transform);
         if(scene.buildIndex == 0)
         {
             Destroy(gameObject);
@@ -94,7 +90,7 @@ public class PlayerManager : MonoBehaviour
         {
             Destroy(playerReference);
         }
-        playerReference = Instantiate(playerPrefab, b.position, Quaternion.identity);
+        playerReference = GameObject.Instantiate(playerPrefab, b.position, Quaternion.identity);
         playerReference.GetComponent<SpriteRenderer>().color = playerColor;
         PlayerController pc = playerReference.GetComponent<PlayerController>();
         SetInputAction("Move", pc.onMove);
@@ -108,7 +104,7 @@ public class PlayerManager : MonoBehaviour
             PlayerController pc = playerReference.GetComponent<PlayerController>();
             SetInputAction("Move", pc.onMove,true); //unsetting move action
             SetInputAction("Fire", pc.onFire,true); //unsetting fire action
-            Destroy(playerReference);
+            GameObject.Destroy(playerReference);
         }
     }
 
