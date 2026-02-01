@@ -11,10 +11,12 @@ public class PlayerStats : MonoBehaviour, IDamagable
     }
 
     public UnityEvent DestroyedEvent;
+    public UnityEvent DamagedEvent;
 
     public void TakeDamage(int dmg)
     {
         health -= dmg;
+        DamagedEvent?.Invoke();
         if (health <= 0)
         {
             DestroyedEvent?.Invoke();

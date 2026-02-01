@@ -1,0 +1,22 @@
+.border {
+    border-left-color: rgb(49, 26, 17);
+    border-right-color: rgb(49, 26, 17);
+    border-top-color: rgb(49, 26, 17);
+    border-bottom-color: rgb(49, 26, 17);
+    border-top-width: 4px;
+    border-right-width: 4px;
+    border-bottom-width: 4px;
+    border-left-width: 4px;
+    border-top-left-radius: 15px;
+    border-top-right-radius: 15px;
+    border-bottom-right-radius: 15px;
+    border-bottom-left-radius: 15px;
+}
+
+.background {
+    align-items: center;
+    justify-content: center;
+    background-color: rgb(115, 37, 38);
+    flex-grow: 1;
+    flex-shrink: 1;
+}

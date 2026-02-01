@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 8200919706217538244}
   - component: {fileID: 7066425702165266288}
   - component: {fileID: -5772227570001746240}
-  m_Layer: 6
+  m_Layer: 7
   m_Name: SpearBullet
   m_TagString: PlayerBullet
   m_Icon: {fileID: 0}
@@ -78,7 +78,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 987819425
-  m_SortingLayer: 2
+  m_SortingLayer: 3
   m_SortingOrder: -1
   m_Sprite: {fileID: 21300000, guid: e9d1dcb1b0e2bde45967e246bf11941a, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -193,6 +193,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 784af73ae65b9ae4691d8154186b11a2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  padding: 0.75
   offScreenEvent:
     m_PersistentCalls:
       m_Calls:
@@ -208,3 +209,6 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+  onScreenEvent:
+    m_PersistentCalls:
+      m_Calls: []

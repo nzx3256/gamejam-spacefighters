@@ -19,7 +19,7 @@ public class BulletSpawner : MonoBehaviour
     [SerializeField]
     private float distance = 0f;
     private float sizeScalar = 0.5f;
-    [SerializeField]
+    [SerializeField] [Min(0.5f)]
     private float bulletSpeed = 1f;
     [SerializeField]
     private GameObject bulletPrefab;
@@ -91,6 +91,8 @@ public class BulletSpawner : MonoBehaviour
                     DrawPlus(totalWidth / 2f * transform.right * -1 + transform.right * stride * i + transform.position);
                 }
                 break;
+            default:
+                break;
         }
 
     }
@@ -151,9 +153,12 @@ public class BulletSpawner : MonoBehaviour
                 totalWidth = stride * (spawnWidth - 1);
                 for (int i = 0; i < spawnWidth; i++)
                 {
-                    Vector3 point = totalWidth / 2f * transform.right * -1 + transform.right * stride * i + transform.position;
-                    GameObject bullet = GameObject.Instantiate(bulletPrefab, point, Quaternion.identity);
-                    bullet.GetComponent<BulletScript>().initialVelocity = bulletSpeed * transform.up * -1;
+                    Vector3 point = totalWidth / 2f * transform.right * -1 + transform.right * stride * i + transform.position + transform.up * -1 * distance;
+                    GameObject bullet = GameObject.Instantiate(bulletPrefab, point, transform.rotation);
+                    IStartVelocity script;
+                    if(bullet.TryGetComponent(out script)){
+                        script.initialVelocity = bulletSpeed * (Vector2)transform.up * -1;
+                    }
                 }
                 break;
             default:

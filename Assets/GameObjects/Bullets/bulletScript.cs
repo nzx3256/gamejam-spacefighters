@@ -2,15 +2,29 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
+using UnityEditor.Experimental.GraphView;
 using UnityEngine;
+using UnityEngine.InputSystem.Utilities;
+using UnityEngine.SceneManagement;
 
 [RequireComponent(typeof(Rigidbody2D))]
-public class BulletScript : MonoBehaviour, IDamagable
+public class BulletScript : MonoBehaviour, IDamagable, IStartVelocity
 {
-    public Vector2 initialVelocity;
+    [SerializeField]
+    private Vector2 direction;
+    [SerializeField]
+    private float magnitude;
+    public float Magnitude
+    {
+        get => magnitude;
+    }
+    public Vector2 initialVelocity
+    {
+        get { return direction.normalized*magnitude; }
+        set { direction = value.normalized; magnitude = value.magnitude; }
+    }
     private Collider2D col;
     private Rigidbody2D rb;
-    private Camera cam;
 
     [SerializeField]
     private int strength = 1;
@@ -21,6 +35,8 @@ public class BulletScript : MonoBehaviour, IDamagable
         get => health;
     }
 
+    private Transform bulletContainer;
+
     [SerializeField]
     private bool indestructible = false;
 
@@ -29,10 +45,14 @@ public class BulletScript : MonoBehaviour, IDamagable
 
     void Start()
     {
-        Transform bulletContainer = GameObject.FindWithTag("BulletContainer").transform;
-        if (bulletContainer != null)
+        GameObject go;
+        if (bulletContainer != null || (go = GameObject.FindWithTag("BulletContainer")) != null && go.TryGetComponent(out bulletContainer))
         {
             transform.SetParent(bulletContainer);
+        }
+        else
+        {
+            transform.SetParent(null);
         }
 
         rb = GetComponent<Rigidbody2D>();
@@ -42,12 +62,9 @@ public class BulletScript : MonoBehaviour, IDamagable
             Debug.LogError("No Collider on " + gameObject.name + ". Destroying Object");
             Destroy(gameObject);
         }
-        col.isTrigger = true;
-        cam = Camera.main;
-        if (cam == null)
+        else
         {
-            Debug.LogError("Could not find main camera. Destroying " + gameObject.name);
-            Destroy(gameObject);
+            col.isTrigger = true;
         }
     }
 

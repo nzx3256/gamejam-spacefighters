@@ -15,8 +15,6 @@ public class PlayerController : MonoBehaviour
     [SerializeField]
     private GameObject bulletPrefab;
     [SerializeField]
-    private bool moveWithCamera = true;
-    [SerializeField]
     private SpecialAttackScript specialAttack;
     [SerializeField]
     private float specialCooldownTime = 30f;
@@ -60,7 +58,6 @@ public class PlayerController : MonoBehaviour
         {
             SpecialButtonDown = false;
         }
-        Debug.Log(SpecialButtonDown);
     }
 
     private void Start()
@@ -83,7 +80,10 @@ public class PlayerController : MonoBehaviour
             if (bulletPrefab != null)
             {
                 GameObject bullet = Instantiate(bulletPrefab, transform.position + Vector3.up * bulletSpawnYoffset, Quaternion.identity);
-                bullet.GetComponent<BulletScript>().initialVelocity = Vector2.up * (8f + rb.linearVelocityY);
+                BulletScript script;
+                if(bullet.TryGetComponent(out script)){
+                    script.initialVelocity = Vector2.up * (8f + rb.linearVelocityY);
+                }
                 StartCoroutine(delayNextShot());
             }
         }
@@ -97,6 +97,7 @@ public class PlayerController : MonoBehaviour
         //rb.linearVelocity = Vector2.Lerp(rb.linearVelocity, lastDirection.normalized * moveSpeed, 0.18f);
         rb.linearVelocity = lastDirection * moveSpeed;
         anim.SetFloat("xdir", lastDirection.x);
+        anim.SetFloat("yVel", rb.linearVelocityY);
     }
 
     private IEnumerator delayNextShot()
@@ -121,9 +122,10 @@ public class PlayerController : MonoBehaviour
         isSpecialAvailable = true;
     }
 
+
     private void OnCollisionEnter2D(Collision2D other)
     {
-        Debug.Log(other.collider.name);
+        //Debug.Log(other.collider.name);
     }
 
     private void OnTriggerEnter2D(Collider2D other)

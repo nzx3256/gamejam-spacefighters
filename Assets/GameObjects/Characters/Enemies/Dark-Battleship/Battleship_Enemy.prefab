@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1000250187736436984}
   - component: {fileID: 2566907254800933397}
-  m_Layer: 7
+  m_Layer: 8
   m_Name: Bidirectional
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -64,7 +64,8 @@ GameObject:
   - component: {fileID: 6082177145889359099}
   - component: {fileID: 292119952254060898}
   - component: {fileID: 75336034438159795}
-  m_Layer: 7
+  - component: {fileID: 6587496857009958992}
+  m_Layer: 8
   m_Name: Battleship_Enemy
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -225,7 +226,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3d551a6c7e283244d80a6fa5f78eafa3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  shootsBullets: 1
+  shootsBullets: 0
   BulletShootSequence: []
   shootingDelay: 2
   DeactivateEvent:
@@ -284,6 +285,21 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &6587496857009958992
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4168438319654937850}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e0a60bab38eb1f540b18953b6edd9a06, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  shootsBullets: 0
+  BulletShootSequence: []
+  shootingDelay: 2
 --- !u!1 &4575211738702263401
 GameObject:
   m_ObjectHideFlags: 0
@@ -294,7 +310,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7867745554645287742}
   - component: {fileID: 8523110623498451696}
-  m_Layer: 7
+  m_Layer: 8
   m_Name: Circular
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -344,7 +360,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6714548827745000269}
   - component: {fileID: 4555115483941294864}
-  m_Layer: 7
+  m_Layer: 8
   m_Name: Straight
   m_TagString: Untagged
   m_Icon: {fileID: 0}

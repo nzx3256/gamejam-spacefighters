@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 8314127215355545097}
   - component: {fileID: 8187974045702526061}
   - component: {fileID: -8527525240938369728}
-  m_Layer: 6
+  m_Layer: 7
   m_Name: ShieldBullet
   m_TagString: PlayerBullet
   m_Icon: {fileID: 0}
@@ -30,7 +30,7 @@ Transform:
   m_GameObject: {fileID: 6888432690750049954}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.85, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -79,8 +79,8 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 987819425
   m_SortingLayer: 2
-  m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: b723a5d88a15450478870278fd8d1aa2, type: 3}
+  m_SortingOrder: -1
+  m_Sprite: {fileID: 5072349173645105071, guid: ed4ceb5c2f7d6d941b18404280594e46, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -125,8 +125,8 @@ CircleCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: 0, y: 0}
-  m_Radius: 0.25
+  m_Offset: {x: 0, y: 0.27}
+  m_Radius: 0.1
 --- !u!50 &8314127215355545097
 Rigidbody2D:
   serializedVersion: 5
@@ -166,7 +166,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3da6ac99235b9644f869d78178ca8743, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  initialVelocity: {x: 0, y: 0}
+  direction: {x: 0, y: 1}
+  magnitude: 8
   strength: 1
   health: 1
   indestructible: 0
@@ -183,6 +184,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 784af73ae65b9ae4691d8154186b11a2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  padding: 0.75
   offScreenEvent:
     m_PersistentCalls:
       m_Calls:
@@ -198,3 +200,6 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+  onScreenEvent:
+    m_PersistentCalls:
+      m_Calls: []

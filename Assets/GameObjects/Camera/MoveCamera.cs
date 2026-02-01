@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class MoveCamera : MonoBehaviour
@@ -7,7 +8,7 @@ public class MoveCamera : MonoBehaviour
     [SerializeField]
     private float moveVelocity = 1f;
 
-    private float upwardVelocity
+    public float upwardVelocity
     {
         get => moveVelocity;
     }

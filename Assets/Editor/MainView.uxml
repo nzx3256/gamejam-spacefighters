@@ -1,0 +1,19 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" editor-extension-mode="False">
+    <Style src="project://database/Assets/Editor/MainView.uss?fileID=7433441132597879392&amp;guid=6e872d99dc1212f418fa16858b6cc142&amp;type=3#MainView" />
+    <ui:VisualElement class="background">
+        <ui:VisualElement style="flex-grow: 0; flex-direction: row; height: 350px;">
+            <ui:ListView name="CharacterList" style="width: 230px; margin-right: 6px; background-color: rgb(110, 57, 37); border-top-width: 4px; border-right-width: 4px; border-bottom-width: 4px; border-left-width: 4px; border-top-left-radius: 15px; border-top-right-radius: 15px; border-bottom-right-radius: 15px; border-bottom-left-radius: 15px; border-left-color: rgb(0, 0, 0); border-right-color: rgb(0, 0, 0); border-top-color: rgb(0, 0, 0); border-bottom-color: rgb(0, 0, 0); padding-top: 0;" />
+            <ui:VisualElement style="flex-grow: 1; align-items: flex-end; justify-content: space-between; border-top-width: 0; border-right-width: 0; border-bottom-width: 0; border-left-width: 0; border-left-color: rgb(0, 0, 0); border-right-color: rgb(0, 0, 0); border-top-color: rgb(0, 0, 0); border-bottom-color: rgb(0, 0, 0); height: 350px;">
+                <ui:VisualElement name="CharacterDetails" template="CharacterDetails">
+                    <ui:VisualElement class="border" style="flex-grow: 0; width: 276px; justify-content: center; align-items: center; background-color: rgb(170, 89, 57); padding-top: 8px; padding-right: 8px; padding-bottom: 8px; padding-left: 8px;">
+                        <ui:VisualElement style="flex-grow: 1; width: 120px; height: 120px; padding-top: 4px; padding-right: 4px; padding-bottom: 4px; padding-left: 4px; background-color: rgb(255, 133, 84); border-left-color: rgb(49, 26, 17); border-right-color: rgb(49, 26, 17); border-top-color: rgb(49, 26, 17); border-bottom-color: rgb(49, 26, 17); border-top-width: 2px; border-right-width: 2px; border-bottom-width: 2px; border-left-width: 2px; border-top-left-radius: 13px; border-top-right-radius: 13px; border-bottom-right-radius: 13px; border-bottom-left-radius: 13px;">
+                            <ui:VisualElement name="CharacterPortrait" style="flex-grow: 1; -unity-background-scale-mode: scale-to-fit;" />
+                        </ui:VisualElement>
+                        <ui:Label text="Name" name="CharacterName" style="-unity-font-style: bold; font-size: 18px; padding-top: 1px; padding-bottom: 1px; margin-top: 0; padding-right: 1px; margin-bottom: 0; text-overflow: clip; margin-right: 2px;" />
+                        <ui:Label text="Class" name="CharacterClass" style="margin-top: 0; padding-top: 1px; padding-bottom: 1px; padding-right: 1px; margin-right: 2px;" />
+                    </ui:VisualElement>
+                </ui:VisualElement>
+            </ui:VisualElement>
+        </ui:VisualElement>
+    </ui:VisualElement>
+</ui:UXML>

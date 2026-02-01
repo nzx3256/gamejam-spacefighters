@@ -11,7 +11,7 @@ public class ProximitySpawner : BaseSpawner
 
     sealed protected override void Update()
     {
-        base.Update();
+        //base.Update();
         if(targetTransform == null)
         {
             targetTransform = Camera.main.transform;

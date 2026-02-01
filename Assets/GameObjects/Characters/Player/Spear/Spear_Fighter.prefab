@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4220476421473379096}
   - component: {fileID: 9134034928337943805}
-  m_Layer: 6
+  m_Layer: 7
   m_Name: BeamStart
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -97,7 +97,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5844438017541010339}
   - component: {fileID: 725425605914658138}
-  m_Layer: 6
+  m_Layer: 7
   m_Name: BeamMid
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -185,7 +185,7 @@ GameObject:
   - component: {fileID: 6131090894598136706}
   - component: {fileID: 3575203172884596091}
   - component: {fileID: 775922447954147571}
-  m_Layer: 6
+  m_Layer: 7
   m_Name: BeamEnd
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -294,9 +294,9 @@ GameObject:
   m_Component:
   - component: {fileID: 3008215230277145953}
   - component: {fileID: 9187573722650640874}
-  m_Layer: 6
+  m_Layer: 7
   m_Name: LaserParent
-  m_TagString: Untagged
+  m_TagString: PlayerBullet
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -332,6 +332,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   activated: 0
+  laserDirection: 0
   LaserStart: {fileID: 4220476421473379096}
   LaserMid: {fileID: 5844438017541010339}
   LaserEnd: {fileID: 6131090894598136706}
@@ -356,7 +357,7 @@ GameObject:
   - component: {fileID: 1491108016186620757}
   - component: {fileID: 5721611642691332381}
   - component: {fileID: 526383058975289661}
-  m_Layer: 6
+  m_Layer: 7
   m_Name: Spear_Fighter
   m_TagString: Player
   m_Icon: {fileID: 0}

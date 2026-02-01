@@ -1,23 +1,8 @@
-using System.Collections;
-using System.Collections.Generic;
-using System.ComponentModel.Design;
 using UnityEngine;
 using UnityEngine.Events;
 
 public class EnemyScript : MonoBehaviour, IDamagable
 {
-    [Tooltip("Whether the enemy will start shooting or not after spawning.")]
-    [SerializeField]
-    private bool shootsBullets = false;
-    [SerializeField]
-    private List<BulletSpawnGroupWrapper> BulletShootSequence;
-    [SerializeField]
-    [Tooltip("Delay in seconds until enemy starts shooting.\n" +
-        "Does nothing if \"Shoots Bullets\" field is false.")]
-    private float shootingDelay = 2f;
-
-    private bool _shooting = false;
-
     [SerializeField]
     private UnityEvent DeactivateEvent;
     [SerializeField]
@@ -26,10 +11,9 @@ public class EnemyScript : MonoBehaviour, IDamagable
     [SerializeField]
     private UnityEvent DamagedEvent;
 
-    public bool shooting
-    {
-        get => _shooting;
-    }
+    [SerializeField]
+    private bool onDeactivationMoveOffScreen = true;
+
 
     [SerializeField]
     private int health = 10;
@@ -38,26 +22,18 @@ public class EnemyScript : MonoBehaviour, IDamagable
         get;
     }
 
-    private IEnumerator ShootingSubroutine()
-    {
-        yield return new WaitForSeconds(shootingDelay);
-        _shooting = true;
-        foreach (var spawner in BulletShootSequence)
-        {
-            for (int i = 0; i < spawner.SpawnGroup.numToSpawn; i++)
-            {
-                spawner.fireAction?.Invoke();
-                yield return new WaitForSeconds(spawner.SpawnGroup.delay);
-            }
-        }
-        _shooting = false;
-    }
+    private bool activated = true;
 
-    private void Start()
+    public bool Activated
     {
-        if (shootsBullets)
+        get => activated;
+        set
         {
-            StartCoroutine(ShootingSubroutine());
+            activated = value;
+            if (!value)
+            {
+                DeactivateEvent?.Invoke();
+            }
         }
     }
 

@@ -1,5 +1,6 @@
 using System;
 using UnityEngine;
+using UnityEngine.Animations;
 
 public class EnergyShieldScript : SpecialAttackScript
 {
@@ -27,6 +28,7 @@ public class EnergyShieldScript : SpecialAttackScript
             points[i].x = (float)Math.Cos(Math.PI*2/numpoints*i)*radius;
             points[i].y = (float)Math.Sin(Math.PI*2/numpoints*i)*radius;
             points[i].z = 0;
+            points[i] += transform.parent.position;
         }
         Gizmos.DrawLineStrip(points,closed);
     }

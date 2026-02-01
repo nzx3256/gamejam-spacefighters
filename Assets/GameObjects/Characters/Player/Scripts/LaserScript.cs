@@ -1,9 +1,18 @@
 using System.Collections;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 public class LaserScript : SpecialAttackScript
 {
+    private enum LaserDirection
+    {
+        UP = 0,
+        DOWN = 1
+    }
+
+    [SerializeField]
+    private LaserDirection laserDirection;
     [SerializeField]
     private Transform LaserStart;
     [SerializeField]
@@ -22,9 +31,15 @@ public class LaserScript : SpecialAttackScript
     private bool canDamage = true;
 
     [SerializeField]
-    private UnityEngine.Vector2 boxCastSize = new UnityEngine.Vector2(0.5f, 0.5f);
+    private Vector2 boxCastSize = new Vector2(0.5f, 0.5f);
     [SerializeField]
     private float castMaxDistance = 10f;
+
+    [SerializeField] [Min(0f)]
+    private float laserLengthSubractive = 0f;
+
+    private string otherTag;
+    private string otherBulletTag;
 
     private void Start()
     {
@@ -37,6 +52,16 @@ public class LaserScript : SpecialAttackScript
         {
             Debug.Log("LaserStart, LaserMid, and LaserEnd must be set in LaserScript. Disabling this Script");
         }
+        if (tag.Contains("Player"))
+        {
+            otherTag = "Enemy";
+            otherBulletTag = "EnemyBullet";
+        }
+        else if (tag.Contains("Enemy"))
+        {
+            otherTag = "Player";
+            otherBulletTag = "PlayerBullet";
+        }
     }
 
     private void Update()
@@ -45,23 +70,24 @@ public class LaserScript : SpecialAttackScript
         {
             bool found = false;
             float beamStopDistance = 0;
+            Vector2 direction = DirectionIntToVector2(laserDirection);
             EnableVisuals(activated);
-            LayerMask mask = LayerMask.GetMask("Player");
-            RaycastHit2D[] hits = Physics2D.BoxCastAll(transform.position, boxCastSize, 0, Vector2.up, castMaxDistance);
+            LayerMask mask = ~LayerMask.GetMask(LayerMask.LayerToName(gameObject.layer));
+            RaycastHit2D[] hits = Physics2D.BoxCastAll(transform.position, boxCastSize, 0, direction, castMaxDistance, mask);
             foreach (var hit in hits)
             {
-                if (hit.collider.CompareTag("Enemy"))
+                if (hit.collider.CompareTag(otherTag))
                 {
-                    beamStopDistance = hit.point.y - transform.position.y;
+                    beamStopDistance = Mathf.Abs(hit.point.y - transform.position.y);
                     found = true;
                     if (canDamage)
                     {
-                        hit.collider.GetComponent<EnemyScript>().TakeDamage(damage);
+                        hit.collider.GetComponent<IDamagable>().TakeDamage(damage);
                         StartCoroutine(DamageWaitTime());
                     }
                     break;
                 }
-                if (hit.collider.CompareTag("EnemyBullet"))
+                if (hit.collider.CompareTag(otherBulletTag))
                 {
                     GameObject.Destroy(hit.transform.gameObject);
                 }
@@ -70,8 +96,8 @@ public class LaserScript : SpecialAttackScript
             {
                 beamStopDistance = castMaxDistance;
             }
-            midSpriteRenderer.size = new Vector2(midSpriteRenderer.size.x, beamStopDistance);
-            LaserEnd.position = new Vector3(LaserMid.position.x, LaserMid.position.y + beamStopDistance, LaserMid.position.z);
+            midSpriteRenderer.size = new Vector2(midSpriteRenderer.size.x, beamStopDistance-laserLengthSubractive);
+            LaserEnd.position = new Vector3(LaserMid.position.x, LaserMid.position.y + direction.y*(beamStopDistance-laserLengthSubractive), LaserMid.position.z);
         }
         else
         {
@@ -84,6 +110,19 @@ public class LaserScript : SpecialAttackScript
         canDamage = false;
         yield return new WaitForSeconds(cooldown);
         canDamage = true;
+    }
+
+    private Vector2 DirectionIntToVector2(LaserDirection dir)
+    {
+        switch (dir)
+        {
+            case LaserDirection.UP:
+                return Vector2.up;
+            case LaserDirection.DOWN:
+                return Vector2.down;
+            default:
+                return Vector2.zero;
+        }
     }
 
     protected override void EnableVisuals(bool enable)

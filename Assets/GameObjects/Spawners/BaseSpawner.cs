@@ -9,6 +9,7 @@ using NUnit.Framework.Internal;
 using Unity.Mathematics;
 using UnityEngine.UIElements;
 using System.Linq.Expressions;
+using UnityEngine.Events;
 
 public class BaseSpawner : MonoBehaviour
 {
@@ -17,29 +18,29 @@ public class BaseSpawner : MonoBehaviour
     {
         get => _spawning;
     }
-    protected enum SplineDirection
-    {
-        Left=0,
-        Right = 1
-    }
-    [SerializeField] [Tooltip("Move spawner based on offset to camera when spawning objects")]
-    private bool moveWhenSpawning = true;
-    [SerializeField]
-    private float moveTimeDelay = 5f;
-    private bool move = false;
-    [SerializeField]
-    protected SplineDirection direction;
+
+    // protected enum SplineMovementType
+    // {
+    //     TIMED,
+    //     FOREVER,
+        
+    // }
+    // [SerializeField] [Tooltip("Move spawner based on offset to camera when spawning objects")]
+    // private bool moveWhenSpawning = true;
+    // private float moveTimeDelay = 5f;
+    // private bool move = false;
     [SerializeField]
     private List<EnemySpawnGroupWrapper> SpawnOrder;
 
     protected int spawnCounts = 0;
 
-    private Vector3 offsetToCam;
+    public UnityEvent OnSpawningEvent;
 
     protected IEnumerator SpawnObjectGroups()
     {
         _spawning = true;
-        OnSpawn();
+        // OnSpawn();
+        OnSpawningEvent?.Invoke();
         foreach (EnemySpawnGroupWrapper wrapper in SpawnOrder)
         {
             for (int i = 0; i < wrapper.SpawnGroup.numToSpawn; i++)
@@ -54,6 +55,7 @@ public class BaseSpawner : MonoBehaviour
                     spawnPosition = wrapper.splineAnimate.gameObject.transform.position;
                 }
                 GameObject obj = Instantiate(wrapper.splineAnimate.gameObject, spawnPosition, Quaternion.identity);
+                obj.SetActive(true);
                 SplineAnimate splComp;
                 if (!obj.TryGetComponent(out splComp))
                 {
@@ -71,19 +73,37 @@ public class BaseSpawner : MonoBehaviour
         _spawning = false;
         spawnCounts++;
     }
+        
+    private Vector2 getSplinePosition(SplineContainer spline, float w)
+    {
+        if(spline != null)
+        {
+            float3 temp = spline.EvaluatePosition(w);
+            return new Vector2(temp.x, temp.y);
+        }
+        else
+        {
+            return (Vector2)transform.position;
+        }
+    }
 
     private IEnumerator moveToSplineThenPlay(SplineAnimate comp, SplineContainer spline)
     {
-        Vector2 target = transform.position;
-        if (spline != null)
+        Collider2D col;
+        if(comp.gameObject.TryGetComponent(out col))
         {
-            float3 temp = spline.EvaluatePosition(0);
-            target = new Vector2(temp.x, temp.y);
+            col.enabled = false;
         }
-        while (Vector2.Distance((Vector2)comp.transform.position , target) > 0.1f)
+        Vector2 target = getSplinePosition(spline,comp.StartOffset);
+        while (Vector2.Distance((Vector2)comp.transform.position , target) > 0.2f)
         {
-            comp.transform.position = Vector2.Lerp(comp.transform.position, target, 0.1f);
+            target = getSplinePosition(spline,comp.StartOffset);
+            comp.transform.position = Vector2.MoveTowards(comp.transform.position, target, comp.MaxSpeed * Time.fixedDeltaTime);
             yield return new WaitForFixedUpdate();
+        }
+        if(col != null)
+        {
+            col.enabled = true;
         }
         if (spline != null)
         {
@@ -94,38 +114,15 @@ public class BaseSpawner : MonoBehaviour
 
     protected virtual void Start()
     {
-        if(direction == SplineDirection.Right)
-        {
-            transform.localScale = new Vector3(-1f, 1f, 1f);
-        }
-        else
-        {
-            transform.localScale = new Vector3(1f, 1f, 1f);
-        }
     }
 
     protected virtual void Update()
     {
-        if(move || _spawning)
-        {
-            //Moves the spawn based on camera position by default.
-            transform.position = Camera.main.transform.position + offsetToCam;
-        }
+        // if(move || _spawning)
+        // {
+        //     //Moves the spawn based on camera position by default.
+        //     transform.position = Camera.main.transform.position + offsetToCam;
+        // }
     }
 
-    protected virtual void OnSpawn()
-    {
-        if(moveWhenSpawning)
-        {
-            offsetToCam = (transform.position - Camera.main.transform.position);
-            StartCoroutine(moveToggleCoroutine());
-        }
-    }
-
-    private IEnumerator moveToggleCoroutine()
-    {
-        move = move ? false : true;
-        yield return new WaitForSeconds(moveTimeDelay);
-        move = move ? false : true;
-    }
 }
