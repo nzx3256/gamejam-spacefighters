@@ -1,7 +1,12 @@
+using JetBrains.Annotations;
+using Unity.VisualScripting.FullSerializer;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.InputSystem.Controls;
+using UnityEngine.Pool;
+using UnityEngine.Splines;
 
-public class EnemyScript : MonoBehaviour, IDamagable
+public class EnemyScript : Poolable, IDamagable, IPoolable
 {
     [SerializeField]
     private UnityEvent DeactivateEvent;
@@ -10,10 +15,6 @@ public class EnemyScript : MonoBehaviour, IDamagable
 
     [SerializeField]
     private UnityEvent DamagedEvent;
-
-    [SerializeField]
-    private bool onDeactivationMoveOffScreen = true;
-
 
     [SerializeField]
     private int health = 10;
@@ -37,9 +38,31 @@ public class EnemyScript : MonoBehaviour, IDamagable
         }
     }
 
-    private void Update()
+
+    private SpriteRenderer rend;
+
+    private void Start()
     {
-        ;
+        rend = GetComponent<SpriteRenderer>();
+    }
+
+    private void OnDisable()
+    {
+        SplineAnimate splAnim;
+        if(TryGetComponent(out splAnim))
+        {
+            splAnim.Restart(false);
+            splAnim.Container = null;
+        }
+    }
+
+    protected new void Update()
+    {
+        if(!activated && !StaticFunctions.IsVisibleByCamera(rend))
+        {
+            ReleaseOrDestroy();
+        }
+        base.Update();
     }
 
     private void OnTriggerEnter2D(Collider2D other)
@@ -56,7 +79,7 @@ public class EnemyScript : MonoBehaviour, IDamagable
         if (health <= 0)
         {
             DestroyedEvent?.Invoke();
-            GameObject.Destroy(gameObject);
+            ReleaseOrDestroy();
         }
         else
         {

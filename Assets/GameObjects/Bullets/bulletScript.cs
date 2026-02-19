@@ -5,10 +5,11 @@ using Unity.VisualScripting;
 using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 using UnityEngine.InputSystem.Utilities;
+using UnityEngine.Pool;
 using UnityEngine.SceneManagement;
 
 [RequireComponent(typeof(Rigidbody2D))]
-public class BulletScript : MonoBehaviour, IDamagable, IStartVelocity
+public class BulletScript : Poolable, IDamagable, IStartVelocity, IPoolable
 {
     [SerializeField]
     private Vector2 direction;
@@ -68,8 +69,9 @@ public class BulletScript : MonoBehaviour, IDamagable, IStartVelocity
         }
     }
 
-    void Update()
+    protected new void Update()
     {
+        base.Update();
         if (rb.linearVelocity != initialVelocity)
         {
             rb.linearVelocity = initialVelocity;
@@ -114,7 +116,7 @@ public class BulletScript : MonoBehaviour, IDamagable, IStartVelocity
         health -= dmg;
         if (health <= 0 && !indestructible)
         {
-            GameObject.Destroy(gameObject);
+            ReleaseOrDestroy();
         }
     }
 }

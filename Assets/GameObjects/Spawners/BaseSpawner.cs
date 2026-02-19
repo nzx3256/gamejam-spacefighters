@@ -10,6 +10,7 @@ using Unity.Mathematics;
 using UnityEngine.UIElements;
 using System.Linq.Expressions;
 using UnityEngine.Events;
+using UnityEngine.Pool;
 
 public class BaseSpawner : MonoBehaviour
 {
@@ -43,29 +44,36 @@ public class BaseSpawner : MonoBehaviour
         OnSpawningEvent?.Invoke();
         foreach (EnemySpawnGroupWrapper wrapper in SpawnOrder)
         {
+            wrapperObjectIsPooled = true;
             for (int i = 0; i < wrapper.SpawnGroup.numToSpawn; i++)
             {
                 if(wrapper.splineAnimate == null)
                 {
+                    Debug.LogWarning("Null SplineAnimate in " + gameObject.name);
+                    yield return new WaitForEndOfFrame();
                     break;
                 }
-                Vector3 spawnPosition = transform.position;
+                if(wrapper.moveSpline == null)
+                {
+                    Debug.LogWarning("Null MoveSpline in " + gameObject.name);
+                    yield return new WaitForEndOfFrame();
+                    break;
+                }
+                Vector3 spawnPosition = getSplinePosition(wrapper.moveSpline, wrapper.splineAnimate.StartOffset);
                 if (wrapper.splineAnimate.gameObject.scene.name != null) //if gameObject wrapper is not a prefab
                 {
                     spawnPosition = wrapper.splineAnimate.gameObject.transform.position;
                 }
-                GameObject obj = Instantiate(wrapper.splineAnimate.gameObject, spawnPosition, Quaternion.identity);
-                obj.SetActive(true);
+                GameObject obj = PoolableUtils.GetFromPoolOrInstantiate(wrapper.splineAnimate.gameObject, spawnPosition);
                 SplineAnimate splComp;
                 if (!obj.TryGetComponent(out splComp))
                 {
                     Debug.LogError("No SplineAnimate Component on Prefab " + wrapper.splineAnimate.gameObject.name);
+                    PoolableUtils.ReleaseToPoolOrDestroy(obj);
+                    yield return new WaitForEndOfFrame();
                     break;
                 }
                 StartCoroutine(moveToSplineThenPlay(splComp, wrapper.moveSpline));
-                // splComp.PlayOnAwake = true;
-                // splComp.Container = wrapper.moveSpline;
-                // splComp.Play();
 
                 yield return new WaitForSeconds(wrapper.SpawnGroup.delay);
             }
@@ -95,7 +103,7 @@ public class BaseSpawner : MonoBehaviour
             col.enabled = false;
         }
         Vector2 target = getSplinePosition(spline,comp.StartOffset);
-        while (Vector2.Distance((Vector2)comp.transform.position , target) > 0.2f)
+        while (Vector2.Distance((Vector2)comp.transform.position , target) > 0.02f)
         {
             target = getSplinePosition(spline,comp.StartOffset);
             comp.transform.position = Vector2.MoveTowards(comp.transform.position, target, comp.MaxSpeed * Time.fixedDeltaTime);
@@ -118,11 +126,6 @@ public class BaseSpawner : MonoBehaviour
 
     protected virtual void Update()
     {
-        // if(move || _spawning)
-        // {
-        //     //Moves the spawn based on camera position by default.
-        //     transform.position = Camera.main.transform.position + offsetToCam;
-        // }
     }
 
 }

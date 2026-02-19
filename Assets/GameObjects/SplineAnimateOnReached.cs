@@ -1,14 +1,6 @@
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Linq;
-using System.Text;
-using TMPro;
-using Unity.Collections;
-using Unity.Collections.LowLevel.Unsafe;
-using Unity.Mathematics;
-using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.Assertions;
 using UnityEngine.Events;
 using UnityEngine.Splines;
 
@@ -47,9 +39,14 @@ namespace Emptybraces.Splines
 		
 		private int numberOfKnotsReached = 0;
 
-        private void OnEnable()
-        {
-        }
+        private void OnDisable()
+		{
+			_anim.Restart(false);
+			_splinePath = null;
+			_containerLast = null;
+			_anim.Container = null;
+			Reset();
+		}
         private void Awake()
 		{
 			_anim = GetComponent<SplineAnimate>();
@@ -66,7 +63,7 @@ namespace Emptybraces.Splines
 
 		private void Update()
 		{
-			if (!_InitSplitePathIfNeeded())
+			if (!_InitSpritePathIfNeeded())
 				return;
 			else if (numberOfKnots == 0)
 			{
@@ -147,7 +144,7 @@ namespace Emptybraces.Splines
 			}
 		}
 
-		private bool _InitSplitePathIfNeeded()
+		private bool _InitSpritePathIfNeeded()
 		{
 			if (_splinePath == null)
 			{

@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Pool;
 
 public class ProximitySpawner : BaseSpawner
 {
@@ -8,6 +9,8 @@ public class ProximitySpawner : BaseSpawner
     private Transform targetTransform;
     [SerializeField]
     private float spawnDistance;
+
+    private ObjectPool<GameObject> pool;
 
     sealed protected override void Update()
     {

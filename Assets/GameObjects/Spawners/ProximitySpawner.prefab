@@ -118,7 +118,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fa7ad918f0168aa4382e4b764b8118b7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  direction: 0
   SpawnOrder:
   - spawnGroup:
       _spawnForever: 0

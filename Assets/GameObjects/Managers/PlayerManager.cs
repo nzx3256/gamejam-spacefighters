@@ -70,7 +70,7 @@ public class PlayerManager : MonoBehaviour
         //Debug.Log("SetPrefabFromType called");
         if(PlayerInputManager.instance != null)
         {
-            if(!MultiplayerManager.shipPrefabDictionary.TryGetValue(fighterType, out playerPrefab))
+            if(!LocalMultiplayerManager.shipPrefabDictionary.TryGetValue(fighterType, out playerPrefab))
             {
                 //Debug.Log("WARNING: Can't find key value \""+ fighterType + "\" in MultiplayerManager.shipPrefabDictionary.");
             }

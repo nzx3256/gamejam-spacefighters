@@ -167,6 +167,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3da6ac99235b9644f869d78178ca8743, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _poolData: {fileID: 0}
   direction: {x: 0, y: -1}
   magnitude: 5
   strength: 1
@@ -185,12 +186,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 784af73ae65b9ae4691d8154186b11a2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  padding: 0.75
   offScreenEvent:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 3713111572113310832}
-        m_TargetAssemblyTypeName: ObjectOffScreenHook, Assembly-CSharp
+        m_TargetAssemblyTypeName: ScreenBoundsEventHooks, Assembly-CSharp
         m_MethodName: DestroyThisObject
         m_Mode: 1
         m_Arguments:
